@@ -2,5 +2,11 @@
   <img src="stock.png" style="height: 200px"/>
 </template>
 
-<style>
+<script>
+export default {
+  
+}
+</script>
+
+<style lang="scss" module>
 </style>

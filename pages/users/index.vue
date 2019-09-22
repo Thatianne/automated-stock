@@ -7,24 +7,32 @@
 			<b-form-input type="text"/>
 			<b-button style="margin-left: 30px">Adicionar</b-button>
 		</div>
-		<b-table :items="items"/>
+		<b-table :items="users"/>
   </main>
 </template>
 
 <script>
 export default {
-    data () {
-			return {
-				items: [
-					{id: 1, name: "Thatianne", permissão: "Administrador"},
-					{id: 2, name: "Kelvin", permissão: "Funcionário"}
-				]
-			}
+	data () {
+		return {
+			users: []
 		}
+	},
+	mounted() {
+		this.$fireStore.collection('users').get()
+			.then(res => {				
+				res.forEach(user => {
+					this.users.push({
+						id: user.id,
+						...user.data()
+					})					
+				})				
+			})			
+	}
 }
 </script>
 
-<style>
+<style lang="scss" module>
 main {
 	margin: 20px 40px
 }

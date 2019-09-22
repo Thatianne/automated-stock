@@ -1,7 +1,9 @@
 <template>
-  <section class="container">
+  <section :class="$style.container">
     <div class="d-flex flex-row">
-      <div class="d-flex flex-column image-box">
+      <div 
+      class="d-flex flex-column"
+      :class="$style.imageBox">
         <h1 class="title">
           Estoque
         </h1>      
@@ -48,19 +50,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .container input {
   margin-bottom: 12px;
 }
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 
-  .image-box {
+  .imageBox {
     margin-right: 42px;
     padding-right: 42px;
     border-right: 1px solid #0069d9;
