@@ -20,7 +20,7 @@ export default {
 	},
 	mounted() {
 		this.$fireStore.collection('users').get()
-			.then(res => {				
+			.then(res => {
 				res.forEach(user => {
 					this.users.push({
 						id: user.id,

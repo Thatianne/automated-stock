@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { doLogin } from '~/api/users'
+
 import Logo from '~/components/Logo.vue'
 
 export default {
@@ -42,9 +44,13 @@ export default {
     }
   },
   methods: {
-    doLogin () {       
-      if(this.user === 'admin' && this.psw === 'admin')
+    doLogin () {
+      this.$fireAuth.signInWithEmailAndPassword(this.user, this.psw)
+      .then(user => {
         this.$router.push('users')
+        this.$store.dispatch('setUser', user)
+        this.$store.dispatch('isAuthenticated', true)
+      })
     }
   }
 }

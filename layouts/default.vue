@@ -8,6 +8,7 @@
 import TopBar from '~/components/TopBar'
 export default {
   components: { TopBar },
+  middleware: [ 'authenticated' ],
   computed: {
     showTopBar () {      
       return this.$route.name !== 'index'
@@ -22,6 +23,10 @@ export default {
     .container {
       height: calc(100vh - 64px);
     }  
+  }
+
+  .container {
+    height: 100vh;
   }
 
   label {
