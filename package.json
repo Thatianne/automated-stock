@@ -10,7 +10,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "yarn build; push-dir --dir=dist --branch=master --cleanup",
-    "deploy:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES yarn build; push-dir --dir=dist --branch=master --cleanup" 
+    "deploy:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES yarn deploy" 
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
