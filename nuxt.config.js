@@ -1,6 +1,6 @@
 import pkg from './package'
 
-const routerBase = process.env.DEPLOY_ENV === 'GT_PAGES' ? {
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: '/automated-stock/'
   }
