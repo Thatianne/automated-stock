@@ -1,7 +1,15 @@
 import pkg from './package'
 
+const routerBase = process.env.DEPLOY_ENV === 'GT_PAGES' ? {
+  router: {
+    base: '/automated-stock/'
+  }
+} : {}
+
 export default {
   mode: 'spa',
+  
+  ...routerBase,
 
   /*
   ** Headers of the page

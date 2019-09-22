@@ -1,5 +1,5 @@
 <template>
-  <img src="/stock.png" style="height: 200px"/>
+  <img src="/static/stock.png" style="height: 200px"/>
 </template>
 
 <style>
