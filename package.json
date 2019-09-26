@@ -23,7 +23,8 @@
     "nuxt": "^2.4.0",
     "nuxt-fire": "^2.0.0",
     "push-dir": "^0.4.1",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

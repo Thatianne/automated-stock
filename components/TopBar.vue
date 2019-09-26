@@ -1,13 +1,21 @@
 <template>
-	<b-navbar toggleable="lg" type="dark" variant="primary">
+	<b-navbar toggleable="lg" type="dark" variant="info">
 		<b-navbar-brand href="/">Início</b-navbar-brand>
 		
 		<b-navbar-toggle target="collapse"></b-navbar-toggle>
 
 		<b-collapse id="collapse" is-nav>
 			<b-navbar-nav>
-				<b-navbar-item href="/users">Usuários</b-navbar-item>
-				<b-navbar-item href="/environments">Ambientes</b-navbar-item>
+				<b-nav-item
+					href="/users"
+					right>
+					Usuários
+				</b-nav-item>
+				<b-nav-item 
+					href="/environments"
+					right>
+					Ambientes
+				</b-nav-item>
 			</b-navbar-nav>		
 		</b-collapse>
 	</b-navbar>  

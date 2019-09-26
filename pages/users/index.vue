@@ -7,7 +7,7 @@
 			<b-form-input type="text"/>
 			<b-button style="margin-left: 30px">Adicionar</b-button>
 		</div>
-		<b-table :items="users"/>
+		<b-table :items="tableUsers"/>
   </main>
 </template>
 
@@ -15,17 +15,23 @@
 export default {
 	data () {
 		return {
-			users: []
+			users: [],
+			tableUsers: []
 		}
 	},
 	mounted() {
 		this.$fireStore.collection('users').get()
 			.then(res => {
 				res.forEach(user => {
+					const userData = user.data()
 					this.users.push({
 						id: user.id,
-						...user.data()
-					})					
+						...userData
+					})
+					this.tableUsers.push({
+						'Nome': userData.name,
+						'Permissão': userData.permission
+					})			
 				})				
 			})			
 	}

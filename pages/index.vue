@@ -13,10 +13,12 @@
         <label for="">Usuário</label>
         <b-form-input 
           type="text"
+          @keyup.enter.native="doLogin"
           v-model="user" />
         <label for="">Senha</label>
         <b-form-input 
           type="password"
+          @keyup.enter.native="doLogin"
           v-model="psw"/>
         <b-button 
         variant="primary"
@@ -46,10 +48,10 @@ export default {
   methods: {
     doLogin () {
       this.$fireAuth.signInWithEmailAndPassword(this.user, this.psw)
-      .then(user => {
-        this.$router.push('users')
-        this.$store.dispatch('setUser', user)
-        this.$store.dispatch('isAuthenticated', true)
+      .then(data => {
+        const user = data.user.providerData[0]
+        this.$router.push('users')       
+        this.$store.commit('app/setUser', user)        
       })
     }
   }
