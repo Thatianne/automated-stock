@@ -35,7 +35,7 @@
 export default {
 	computed: {
 		baseUrl () {			
-			return process.env.DEPLOY_ENV === 'GH_PAGES' ? 'automated-stock' : ''
+			return process.env.DEPLOY_ENV === 'GH_PAGES' ? '/automated-stock' : ''
 		}
 	},
 	methods: {
