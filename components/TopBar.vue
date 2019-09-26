@@ -12,9 +12,9 @@
 					Usuários
 				</b-nav-item>
 				<b-nav-item 
-					href="/environments"
+					href="/products"
 					right>
-					Ambientes
+					Produtos
 				</b-nav-item>
 			</b-navbar-nav>		
 		</b-collapse>
