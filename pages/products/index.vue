@@ -9,7 +9,7 @@
 					variant="warning"
 					v-b-modal.add-product
 					style="margin-left: 12px">
-					Adicionar
+					Adicionar produto
 				</b-button>
 				<b-button 
 					variant="warning"
@@ -163,7 +163,7 @@ export default {
 				name: '',
 				price: '',
 				counter: 1,
-				validaty: '',
+				validity: '',
 				environment: '',
 				description: '',				
 			},
@@ -201,7 +201,7 @@ export default {
 			})
 		
 		this.$fireStore.collection('products').get()
-			.then(res => {				
+			.then(res => {
 				res.docs.forEach(product => {
 					let productData = product.data()
 					this.tableProducts.push({
