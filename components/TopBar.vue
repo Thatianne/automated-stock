@@ -34,7 +34,8 @@
 <script>
 export default {
 	computed: {
-		baseUrl () {			
+		baseUrl () {
+			return '/automated-stock' // temporário
 			return process.env.DEPLOY_ENV === 'GH_PAGES' ? '/automated-stock' : ''
 		}
 	},
