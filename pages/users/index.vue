@@ -58,7 +58,7 @@ export default {
 			newUser: {
 				name: '',
 				email: '',				
-				password: '123',
+				password: '12345678',
 				permission: 'employeer'
 			},
 			permissions: [

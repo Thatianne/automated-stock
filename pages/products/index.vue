@@ -39,6 +39,16 @@
           <font-awesome-icon :icon="['fa', 'minus']"/>
         </b-button>
     	</template>
+			<template slot="Mover" slot-scope="row">
+        <b-button
+				size="sm"
+				variant="outline-secondary"
+				v-b-tooltip.hover title="Mover um produto"
+				v-b-modal.move-product
+				@click.stop="productMove = row.item" class="mr-1">
+          <font-awesome-icon :icon="['fas', 'arrow-alt-circle-right']"/>
+        </b-button>
+    	</template>
 		</b-table>
 		<b-modal id="add-environment" title="Adicionar ambiente" @ok="addEnvironment">			
 			<b-form @submit="addEnvironment">
@@ -114,7 +124,31 @@
 						placeholder="Informe a quantidade"
 					></b-form-input>
 				</b-form-group>
+				<b-form-group
+					id="input-group-1"
+					label="Validade"
+					label-for="input-1">
+					<b-form-input
+						id="input-1"
+						v-model="product.validity"
+						format="dd/mm/yyyy"
+						type="date"
+						required
+						placeholder="Informe a validade"
+					></b-form-input>
+				</b-form-group>
 			</b-form>
+		</b-modal>
+
+		<b-modal id="move-product" title="Mover produto" @ok="moveProduct">
+			<b-form-group id="input-group-3" label="Ambiente" label-for="input-3">
+				<b-form-select
+					id="input-3"
+					v-model="environmentMove"
+					:options="environmentsOptions"
+					required
+				></b-form-select>					
+			</b-form-group>			
 		</b-modal>
   </main>
 </template>
@@ -128,21 +162,26 @@ export default {
 			product: {
 				name: '',
 				price: '',
+				counter: 1,
+				validaty: '',
 				environment: '',
-				description: '',
-				counter: 1
+				description: '',				
 			},
+			productMove: {},
 			environment: {
 				name: ''
 			},
+			environmentMove: '',
 			environmentsOptions: [],
 			fields: [          
 				'Nome',
 				'Preço',
 				'Quantidade',
+				'Validade',
 				'Ambiente',				
 				'Remover',
-				'Diminuir'
+				'Diminuir',
+				'Mover'
 			],
 		}
 	},
@@ -168,6 +207,7 @@ export default {
 					this.tableProducts.push({
 						"Nome": productData.name,
 						"Preço": productData.price,
+						"Validade": productData.validity,
 						"Descrição": productData.description,
 						"Quantidade": productData.counter,
 						"Ambiente": productData.environment,
@@ -186,6 +226,7 @@ export default {
 				"Uid": productRef.id,
 				"Nome": this.product.name,
 				"Preço": this.product.price,
+				"Validade": this.product.validity,
 				"Descrição": this.product.description,
 				"Quantidade": this.product.counter,				
 				"Ambiente": this.product.environment
@@ -207,7 +248,7 @@ export default {
 			const index = this.tableProducts.indexOf(product)
 			if(index != -1) this.tableProducts.splice(index, 1)
 		},
-		subtractProduct (product) {			
+		subtractProduct (product) {
 			let qtd = parseInt(product['Quantidade'])
 			if(qtd > 1) {
 				product['Quantidade'] = --qtd
@@ -222,6 +263,18 @@ export default {
 			} else {
 				this.removeProduct(product)				
 			}
+		},
+		moveProduct() {
+			const product = this.productMove
+			let productRef = this.$fireStore.collection('products').doc(product['Uid'])			
+			product['Ambiente'] = this.environmentMove
+			productRef.set({
+				name: product['Nome'],
+				price: product['Preço'],
+				environment: this.environmentMove,
+				description: product['Descrição'],
+				counter: product['Preço']
+			})
 		}
 	}
 }
