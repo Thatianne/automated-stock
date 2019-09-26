@@ -7,12 +7,12 @@
 		<b-collapse id="collapse" is-nav>
 			<b-navbar-nav>
 				<b-nav-item
-					href="/users"
+					href="users"
 					right>
 					Usuários
 				</b-nav-item>
 				<b-nav-item 
-					href="/products"
+					href="products"
 					right>
 					Produtos
 				</b-nav-item>

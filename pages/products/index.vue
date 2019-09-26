@@ -17,17 +17,29 @@
 					v-b-tooltip.hover title="Adicionar ambiente"
 					style="margin-left: 12px">
 					+			
-				</b-button>
-				<b-button 
-					variant="info"
-					v-b-modal.remove-product
-					v-b-tooltip.hover title="Remover produto"
-					style="margin-left: 12px">
-					-
-				</b-button>
+				</b-button>				
 			</div>
 		</div>
-		<b-table :items="tableProducts"/>
+		<b-table :items="tableProducts" :fields="fields">
+      <template slot="Remover" slot-scope="row">
+        <b-button 
+				size="sm"
+				variant="outline-danger"
+				v-b-tooltip.hover title="Remover produto"
+				@click.stop="removeProduct(row.item)" class="mr-1">
+          <font-awesome-icon :icon="['fa', 'trash']"/>
+        </b-button>
+    	</template>
+			<template slot="Diminuir" slot-scope="row">
+        <b-button 
+				size="sm"
+				variant="outline-primary"
+				v-b-tooltip.hover title="Retirar um produto"
+				@click.stop="subtractProduct(row.item)" class="mr-1">
+          <font-awesome-icon :icon="['fa', 'minus']"/>
+        </b-button>
+    	</template>
+		</b-table>
 		<b-modal id="add-environment" title="Adicionar ambiente" @ok="addEnvironment">			
 			<b-form @submit="addEnvironment">
 				<b-form-group
@@ -123,7 +135,15 @@ export default {
 			environment: {
 				name: ''
 			},
-			environmentsOptions: []
+			environmentsOptions: [],
+			fields: [          
+				'Nome',
+				'Preço',
+				'Quantidade',
+				'Ambiente',				
+				'Remover',
+				'Diminuir'
+			],
 		}
 	},
 	mounted() {
@@ -138,7 +158,7 @@ export default {
 						text: environmentData.name,
 						key: environmentData.name
 					})
-				})								
+				})
 			})
 		
 		this.$fireStore.collection('products').get()
@@ -150,7 +170,8 @@ export default {
 						"Preço": productData.price,
 						"Descrição": productData.description,
 						"Quantidade": productData.counter,
-						"Ambiente": productData.environment
+						"Ambiente": productData.environment,
+						"Uid": product.id
 					})
 				})
 			})
@@ -160,9 +181,9 @@ export default {
 			let productRef = this.$fireStore.collection('products').doc()
 			productRef.set({
 				...this.product
-			})
-
+			})			
 			this.tableProducts.push({
+				"Uid": productRef.id,
 				"Nome": this.product.name,
 				"Preço": this.product.price,
 				"Descrição": this.product.description,
@@ -179,6 +200,28 @@ export default {
 				text: this.environment.name,
 				key: this.environment.name
 			})
+		},
+		removeProduct (product) {			
+			let productRef = this.$fireStore.collection('products').doc(product['Uid'])
+			productRef.delete()
+			const index = this.tableProducts.indexOf(product)
+			if(index != -1) this.tableProducts.splice(index, 1)
+		},
+		subtractProduct (product) {			
+			let qtd = parseInt(product['Quantidade'])
+			if(qtd > 1) {
+				product['Quantidade'] = --qtd
+				let productRef = this.$fireStore.collection('products').doc(product['Uid'])
+				productRef.set({
+					name: product['Nome'],
+					price: product['Preço'],
+					environment: product['Ambiente'],
+					description: product['Descrição'],
+					counter: qtd
+				})
+			} else {
+				this.removeProduct(product)				
+			}
 		}
 	}
 }
