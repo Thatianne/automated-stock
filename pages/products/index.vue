@@ -60,13 +60,14 @@
 						id="input-1"
 						v-model="environment.name"
 						type="text"
+						maxlength="20"
 						required
 						placeholder="Informe o nome do ambiente"
 					></b-form-input>
 				</b-form-group>
 			</b-form>
 		</b-modal>
-		<b-modal id="add-product" title="Adicionar produto" @ok="addProduct">			
+		<b-modal id="add-product" title="Adicionar produto" @ok="addProduct" @cancel="clearProductForm">			
 			<b-form @submit="addProduct">
 				<b-form-group
 					id="input-group-1"
@@ -77,6 +78,7 @@
 						v-model="product.name"
 						type="text"
 						required
+						maxlength="20"
 						placeholder="Informe o nome"
 					></b-form-input>
 				</b-form-group>
@@ -198,6 +200,8 @@ export default {
 						key: environmentData.name
 					})
 				})
+
+				this.product.environment = this.environmentsOptions.length > 0 ? this.environmentsOptions[0].key : ''
 			})
 		
 		this.$fireStore.collection('products').get()
@@ -231,6 +235,8 @@ export default {
 				"Quantidade": this.product.counter,				
 				"Ambiente": this.product.environment
 			})
+
+			this.clearProductForm()
 		},
 		addEnvironment () {
 			let environmentRef = this.$fireStore.collection('environments').doc()
@@ -275,6 +281,16 @@ export default {
 				description: product['Descrição'],
 				counter: product['Preço']
 			})
+		},
+		clearProductForm () {
+			this.product = {
+				name: '',
+				price: '',
+				counter: 1,
+				validity: '',
+				environment: this.environmentsOptions.length > 0 ? this.environmentsOptions[0].key : '',
+				description: '',
+			}
 		}
 	}
 }

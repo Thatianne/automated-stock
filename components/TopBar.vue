@@ -1,6 +1,6 @@
 <template>
 	<b-navbar toggleable="lg" type="dark" variant="warning">
-		<b-navbar-brand :href="`${baseUrl}/`">Início</b-navbar-brand>
+		<b-navbar-brand>NowControl</b-navbar-brand>
 		
 		<b-navbar-toggle target="collapse"></b-navbar-toggle>
 
