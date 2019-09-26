@@ -1,10 +1,9 @@
 <template>
-  <main class="d-flex flex-column align-items-start">
-		<h2>Usuários</h2>
+  <main class="d-flex flex-column align-items-start">		
 		<div 
 		class="d-flex flex-row justify-content-between"
 		style="margin-bottom: 30px; width: 100%">
-			<b-form-input type="text"/>			
+			<h2>Usuários</h2>
 			<b-button 
 				variant="info"
 				v-b-modal.add-user
@@ -59,7 +58,7 @@ export default {
 			newUser: {
 				name: '',
 				email: '',				
-				password: '',
+				password: '123',
 				permission: 'employeer'
 			},
 			permissions: [
@@ -96,6 +95,12 @@ export default {
 				this.newUser.email,
 				'12345678'
 			)
+
+			this.tableUsers.unshift({
+				'Nome': this.newUser.name,
+				'E-mail': this.newUser.email,
+				'Permissão': this.newUser.permission
+			})
 		}
 	}
 }

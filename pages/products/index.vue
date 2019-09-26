@@ -1,23 +1,31 @@
 <template>
-  <main class="d-flex flex-column align-items-start">
-		<h2>Produtos</h2>
+  <main class="d-flex flex-column align-items-start">		
 		<div 
 		class="d-flex flex-row justify-content-between"
 		style="margin-bottom: 30px; width: 100%">
-			<b-form-input type="text"/>			
-			<b-button 
-				variant="info"
-				v-b-modal.add-product
-				style="margin-left: 30px">
-				Adicionar
-			</b-button>
-			<b-button 
-				variant="info"
-				v-b-modal.add-environment
-				v-b-tooltip.hover title="Adicionar ambiente"
-				style="margin-left: 30px">
-				+			
-			</b-button>
+			<h2>Produtos</h2>
+			<div>
+				<b-button 
+					variant="info"
+					v-b-modal.add-product
+					style="margin-left: 12px">
+					Adicionar
+				</b-button>
+				<b-button 
+					variant="info"
+					v-b-modal.add-environment
+					v-b-tooltip.hover title="Adicionar ambiente"
+					style="margin-left: 12px">
+					+			
+				</b-button>
+				<b-button 
+					variant="info"
+					v-b-modal.remove-product
+					v-b-tooltip.hover title="Remover produto"
+					style="margin-left: 12px">
+					-
+				</b-button>
+			</div>
 		</div>
 		<b-table :items="tableProducts"/>
 		<b-modal id="add-environment" title="Adicionar ambiente" @ok="addEnvironment">			
@@ -141,6 +149,7 @@ export default {
 						"Nome": productData.name,
 						"Preço": productData.price,
 						"Descrição": productData.description,
+						"Quantidade": productData.counter,
 						"Ambiente": productData.environment
 					})
 				})
@@ -152,11 +161,23 @@ export default {
 			productRef.set({
 				...this.product
 			})
+
+			this.tableProducts.push({
+				"Nome": this.product.name,
+				"Preço": this.product.price,
+				"Descrição": this.product.description,
+				"Quantidade": this.product.counter,				
+				"Ambiente": this.product.environment
+			})
 		},
 		addEnvironment () {
 			let environmentRef = this.$fireStore.collection('environments').doc()
 			environmentRef.set({
 				...this.environment
+			})
+			this.environmentsOptions.push({
+				text: this.environment.name,
+				key: this.environment.name
 			})
 		}
 	}
