@@ -2,11 +2,8 @@
   <section :class="$style.container">
     <div class="d-flex flex-row">
       <div 
-      class="d-flex flex-column"
-      :class="$style.imageBox">
-        <h1 class="title">
-          Estoque
-        </h1>      
+      class="d-flex flex-column flex-wrap justify-content-center"
+      :class="$style.imageBox">             
         <logo />
       </div>    
       <div class="d-flex flex-column align-items-start justify-content-center">
@@ -21,7 +18,7 @@
           @keyup.enter.native="doLogin"
           v-model="psw"/>
         <b-button 
-        variant="primary"
+        variant="warning"        
         @click="doLogin">
         Entrar
         </b-button>
@@ -73,7 +70,15 @@ export default {
   .imageBox {
     margin-right: 42px;
     padding-right: 42px;
-    border-right: 1px solid #0069d9;
+    border-right: 1px solid #D5AD56;
+  }  
+}
+@media(max-width: 500px) {
+  .container {
+    .imageBox {
+      margin: 0 0 16px 0;
+      padding: 0;
+    }
   }
 }
 </style>

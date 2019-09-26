@@ -6,13 +6,13 @@
 			<h2>Produtos</h2>
 			<div>
 				<b-button 
-					variant="info"
+					variant="warning"
 					v-b-modal.add-product
 					style="margin-left: 12px">
 					Adicionar
 				</b-button>
 				<b-button 
-					variant="info"
+					variant="warning"
 					v-b-modal.add-environment
 					v-b-tooltip.hover title="Adicionar ambiente"
 					style="margin-left: 12px">

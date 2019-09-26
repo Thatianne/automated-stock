@@ -35,6 +35,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/app.scss' // use our build, as entered via app.scss
   ],
 
   /*
@@ -51,7 +52,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
+    ['bootstrap-vue/nuxt', {css: false}],
     '@nuxtjs/pwa',
     [
       'nuxt-fire',

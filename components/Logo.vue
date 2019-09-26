@@ -1,5 +1,5 @@
 <template>
-  <img src="stock.png" style="height: 200px"/>
+  <img src="now-control.jpeg" style="height: 200px"/>
 </template>
 
 <script>

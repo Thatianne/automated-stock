@@ -1,0 +1,14 @@
+
+$yellow: #D5AD56 !default;
+
+$warning: $yellow !default;
+
+.btn-warning {
+  color: #fff !important;
+}
+
+.table thead th {
+	font-weight: 400
+}
+
+@import "node_modules/bootstrap/scss/bootstrap";

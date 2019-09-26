@@ -5,7 +5,7 @@
 		style="margin-bottom: 30px; width: 100%">
 			<h2>Usuários</h2>
 			<b-button 
-				variant="info"
+				variant="warning"
 				v-b-modal.add-user
 				style="margin-left: 30px">
 				Adicionar
